@@ -19,7 +19,9 @@ WAIT = 2.0                  # The length of the delay between hitting enter and 
 USE_SOUND = False           # Whether or not a sound should be played to indicate recording stop/start
 
 root = os.path.dirname(os.path.realpath(__file__))
-output_dir = 'videos'
+output_dir = os.path.join(root, 'videos')
+if not os.path.exists(output_dir):
+    os.mkdir(output_dir)
 
 if __name__ == '__main__':
     pipe = rs.pipeline()
@@ -41,7 +43,7 @@ if __name__ == '__main__':
             time.sleep(WAIT)
             play_sound()
             while True:
-                path = os.path.join(root, output_dir, 'video_{}.avi'.format(counter))
+                path = os.path.join(output_dir, 'video_{}.avi'.format(counter))
                 if not os.path.exists(path):
                     break
                 counter += 1
